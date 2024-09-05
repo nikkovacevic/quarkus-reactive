@@ -5,6 +5,7 @@ INSERT INTO authors (id, name, surname, dateofbirth) VALUES
 (3, 'George', 'Orwell', '1903-06-25'),
 (4, 'Virginia', 'Woolf', '1882-01-25'),
 (5, 'Ernest', 'Hemingway', '1899-07-21');
+ALTER SEQUENCE authors_seq RESTART WITH 6;
 
 -- Inserting books for each author
 -- Author 1: Jane Austen
@@ -36,3 +37,5 @@ INSERT INTO books (id, title, isbn, price, yearofrelease, author_id) VALUES
 (13, 'The Old Man and the Sea', '978-0-68-480122-0', 13.99, 1952, 5),
 (14, 'For Whom the Bell Tolls', '978-0-68-480123-7', 14.99, 1940, 5),
 (15, 'A Farewell to Arms', '978-0-68-480124-4', 12.99, 1929, 5);
+
+ALTER SEQUENCE books_seq RESTART WITH 16;
