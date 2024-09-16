@@ -1,9 +1,10 @@
 ####
 # This Dockerfile is used in order to build a container that runs the Quarkus application in JVM mode
 #
+# Inside application.properties the quarkus.package.jar.type property should be set to legacy-jar
 # Before building the container image run:
 #
-# ./mvnw package -Dquarkus.package.jar.type=legacy-jar
+# ./mvnw package
 #
 # Then, build the image with:
 #

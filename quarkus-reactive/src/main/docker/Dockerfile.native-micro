@@ -4,17 +4,18 @@
 # It reduces the size of the resulting container image.
 # Check https://quarkus.io/guides/quarkus-runtime-base-image for further information about this image.
 #
+# This step should be ran inside the x64 Native Tools Command Prompt for VS 2022 console
 # Before building the container image run:
 #
-# ./mvnw package -Dnative
+# ./mvnw package -Dnative -Dquarkus.native.container-build=true
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native-micro -t quarkus/quarkus-reactive .
+# docker build -f src/main/docker/Dockerfile.native-micro -t quarkus/quarkus-reactive-native-micro .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/quarkus-reactive
+# docker run -i --rm -p 8080:8080 quarkus/quarkus-reactive-native-micro
 #
 ###
 FROM quay.io/quarkus/quarkus-micro-image:2.0

@@ -17,6 +17,21 @@ class AuthorResourceTest {
 
     @Test
     @Order(1)
+    public void createAuthor() {
+        Integer createdId = given()
+                .contentType("application/json")
+                .body("{ \"name\": \"George\", \"surname\": \"Orwell\", \"dateOfBirth\": \"1903-06-25\" }")
+                .when()
+                .post("/authors")
+                .then()
+                .statusCode(200)
+                .extract()
+                .path("id");
+        authorId = createdId.toString();
+    }
+
+    @Test
+    @Order(2)
     public void listAllAuthors() {
         given()
                 .when()
@@ -24,7 +39,7 @@ class AuthorResourceTest {
                 .then()
                 .statusCode(200)
                 .contentType("application/json")
-                .body("size()", equalTo(5));
+                .body("size()", equalTo(1));
     }
 
     @Test
@@ -32,7 +47,7 @@ class AuthorResourceTest {
     public void getAuthorById() {
         given()
                 .when()
-                .get("/authors/3")
+                .get("/authors/1")
                 .then()
                 .statusCode(200)
                 .contentType("application/json")
@@ -47,30 +62,16 @@ class AuthorResourceTest {
     }
 
     @Test
-    @Order(3)
-    public void createAuthor() {
-        Integer createdId = given()
-                .contentType("application/json")
-                .body("{ \"name\": \"Nik\", \"surname\": \"Kovacevic\", \"dateOfBirth\": \"2000-10-03\" }")
-                .when()
-                .post("/authors")
-                .then()
-                .statusCode(200)
-                .extract()
-                .path("id");
-        authorId = createdId.toString();
-    }
-    @Test
     @Order(4)
     public void updateAuthor() {
         given()
                 .contentType("application/json")
-                .body("{ \"name\": \"Nik\", \"surname\": \"Kovacevic\", \"dateOfBirth\": \"1990-01-01\" }")
+                .body("{ \"name\": \"George\", \"surname\": \"Orwell\", \"dateOfBirth\": \"1902-06-25\" }")
                 .when()
                 .put("/authors/" + authorId)
                 .then()
                 .statusCode(200)
-                .body("dateOfBirth", equalTo("1990-01-01"));
+                .body("dateOfBirth", equalTo("1902-06-25"));
 
     }
 
