@@ -2,7 +2,9 @@ package um.feri.service;
 
 import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
+import jakarta.ws.rs.core.Response;
 import um.feri.model.Author;
 
 import java.util.List;
@@ -15,14 +17,19 @@ public class AuthorService {
     }
 
     public Author getAuthorById(Long id) {
-        return Author.findById(id);
+        Author author = Author.findById(id);
+        if (author == null) {
+            throw new NotFoundException();
+        }
+        return author;
     }
 
-    private Author findIfAuthorExists(Author author) {
+    public Author findIfAuthorExists(Author author) {
         return Author.find("name = ?1 and surname = ?2 and dateOfBirth = ?3",
                            author.getName(), author.getSurname(), author.getDateOfBirth()).firstResult();
     }
 
+    @Transactional
     public Author addAuthor(Author author) {
         Author existingAuthor = findIfAuthorExists(author);
         if (existingAuthor != null) {
@@ -32,19 +39,25 @@ public class AuthorService {
         return author;
     }
 
-    public void updateAuthor(Long id, Author author) {
+    @Transactional
+    public Response updateAuthor(Long id, Author author) {
         Author existingAuthor = getAuthorById(id);
         if (existingAuthor == null) {
-            //throw 404
             throw new NotFoundException();
         }
         existingAuthor.setName(author.getName());
         existingAuthor.setSurname(author.getSurname());
         existingAuthor.setDateOfBirth(author.getDateOfBirth());
         existingAuthor.persist();
+        return Response.ok(existingAuthor).build();
     }
 
-    public void deleteAuthor(Long id) {
-        Author.deleteById(id);
+    @Transactional
+    public Response deleteAuthor(Long id) {
+        boolean deleted = Author.deleteById(id);
+        if (deleted) {
+            return Response.noContent().build();
+        }
+        throw new NotFoundException();
     }
 }

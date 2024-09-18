@@ -24,11 +24,14 @@ class AuthorServiceTest {
     @Inject
     AuthorService service;
 
+    private static Long authorId;
+
     @Test
     @Order(1)
     public void addAuthor(TransactionalUniAsserter a) {
         Author author = new Author("J. K.", "Rowling", LocalDate.of(1965, 7, 31));
         a.assertThat(() -> service.addAuthor(author), newAuthor -> {
+            authorId = newAuthor.id;
             assertNotNull(newAuthor);
             assertEquals("J. K.", newAuthor.getName());
             assertEquals("Rowling", newAuthor.getSurname());
@@ -54,9 +57,9 @@ class AuthorServiceTest {
     }
 
     @Test
-    @Order(2)
+    @Order(3)
     public void getAuthorById(TransactionalUniAsserter a) {
-        a.assertThat(() -> service.getAuthorById(2L), response -> {
+        a.assertThat(() -> service.getAuthorById(authorId), response -> {
             assertEquals(200, response.getStatus());
             Author author = (Author) response.getEntity();
             assertNotNull(author);
@@ -72,7 +75,7 @@ class AuthorServiceTest {
     }
 
     @Test
-    @Order(3)
+    @Order(4)
     public void findIfAuthorExists(TransactionalUniAsserter a) {
         Author author = new Author("J. K.", "Rowling", LocalDate.of(1965, 7, 31));
         a.assertThat(() -> service.findIfAuthorExists(author), existingAuthor -> {
@@ -83,10 +86,10 @@ class AuthorServiceTest {
     }
 
     @Test
-    @Order(4)
+    @Order(5)
     public void updateAuthor(TransactionalUniAsserter a) {
         Author author = new Author("J.", "K. Rowling", LocalDate.of(1965, 7, 31));
-        a.assertThat(() -> service.updateAuthor(2L, author), response -> {
+        a.assertThat(() -> service.updateAuthor(authorId, author), response -> {
             assertEquals(200, response.getStatus());
             Author updatedAuthor = (Author) response.getEntity();
             assertNotNull(updatedAuthor);
@@ -102,9 +105,9 @@ class AuthorServiceTest {
     }
 
     @Test
-    @Order(5)
+    @Order(6)
     public void deleteAuthor(TransactionalUniAsserter a) {
-        a.assertThat(() -> service.deleteAuthor(2L), response -> {
+        a.assertThat(() -> service.deleteAuthor(authorId), response -> {
             assertEquals(204, response.getStatus());
         });
         a.assertEquals(() -> Author.count(), 0L);
