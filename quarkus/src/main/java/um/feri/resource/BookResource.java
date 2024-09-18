@@ -1,6 +1,5 @@
 package um.feri.resource;
 
-import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;
@@ -12,7 +11,6 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.jboss.resteasy.reactive.RestResponse;
 import um.feri.model.Book;
 import um.feri.service.BookService;
 
@@ -27,8 +25,9 @@ public class BookResource {
     BookService bookService;
 
     @GET
-    public List<Book> getBooks() {
-        return bookService.getAllBooks();
+    public Response getBooks() {
+        List<Book> allBooks = bookService.getAllBooks();
+        return Response.status(200).entity(allBooks).build();
     }
 
     @GET
@@ -40,8 +39,8 @@ public class BookResource {
 
     @POST
     public Response addBook(Book book) {
-        bookService.createBook(book);
-        return Response.status(201).build();
+        Book newBook = bookService.createBook(book);
+        return Response.status(201).entity(newBook).build();
     }
 
     @PUT
