@@ -92,6 +92,7 @@ class BookServiceTest {
     void deleteBook() {
         service.deleteBook(bookId);
         assertThrows(NotFoundException.class, () -> service.getBookById(bookId));
+
         assertThrows(NotFoundException.class, () -> service.deleteBook(99L));
     }
 }

@@ -30,9 +30,7 @@ public class Book extends PanacheEntity {
     private Double price;
     @Column(nullable = false)
     private Integer yearOfRelease;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "author_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Author author;
+    @Column(nullable = false)
+    private String author;
 
 }

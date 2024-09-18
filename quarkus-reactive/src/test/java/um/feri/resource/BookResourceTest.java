@@ -1,6 +1,8 @@
 package um.feri.resource;
 
+import io.quarkus.test.hibernate.reactive.panache.TransactionalUniAsserter;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.vertx.RunOnVertxContext;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,17 +18,24 @@ class BookResourceTest {
     private static Long bookId;
 
     @Transactional
+    @RunOnVertxContext
     @BeforeEach
-    void setUp() {
-        Book book = new Book("Murder on the Orient Express", "1234567890", 39.99, 1934, "Agatha Christie");
-        book.persist();
-        bookId = book.id;
+    void setUp(TransactionalUniAsserter a) {
+        a.execute(() -> {
+            Book book = new Book("Murder on the Orient Express", "1234567890", 39.99, 1934, "Agatha Christie");
+            return book.persist()
+                    .onItem().transform(persisted -> {
+                        bookId = book.id;
+                        return book;
+                    });
+        });
     }
 
     @Transactional
+    @RunOnVertxContext
     @AfterEach
-    void tearDown() {
-        Book.deleteAll();
+    void tearDown(TransactionalUniAsserter a) {
+        a.execute(() -> Book.deleteAll());
     }
 
     @Test

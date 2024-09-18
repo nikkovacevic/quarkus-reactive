@@ -27,31 +27,32 @@ public class BookResource {
     BookService bookService;
 
     @GET
-    public Uni<List<Book>> getBooks() {
-        return bookService.getAllBooks();
+    public Uni<Response> getBooks() {
+        return bookService.getAllBooks().onItem().transform(list -> Response.status(200).entity(list).build());
     }
 
     @GET
     @Path("/{bookId}")
     public Uni<Response> getBookById(@PathParam("bookId") Long bookId) {
-        return bookService.getBookById(bookId);
+        return bookService.getBookById(bookId)
+                .onItem().transform(book -> Response.status(200).entity(book).build());
     }
 
     @POST
-    public Uni<RestResponse<Book>> addBook(Book book) {
-        return bookService.createBook(book);
+    public Uni<Response> addBook(Book newBook) {
+        return bookService.createBook(newBook).onItem().transform(book -> Response.status(201).entity(book).build());
     }
 
     @PUT
     @Path("/{bookId}")
     public Uni<Response> updateBook(@PathParam("bookId") Long bookId, Book updatedBook) {
-        return bookService.updateBook(bookId, updatedBook);
+        return bookService.updateBook(bookId, updatedBook).onItem().transform(x -> Response.status(204).build());
     }
 
     @DELETE
     @Path("/{bookId}")
     public Uni<Response> deleteBook(@PathParam("bookId") Long bookId) {
-        return bookService.deleteBook(bookId);
+        return bookService.deleteBook(bookId).onItem().transform(x -> Response.status(204).build());
     }
 
 }
