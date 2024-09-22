@@ -42,9 +42,6 @@ public class BookService {
     @Transactional
     public void updateBook(Long id, Book newBook) {
         Book existingBook = getBookById(id);
-        if (existingBook == null) {
-            throw new NotFoundException();
-        }
         existingBook.setTitle(newBook.getTitle());
         existingBook.setIsbn(newBook.getIsbn());
         existingBook.setPrice(newBook.getPrice());
