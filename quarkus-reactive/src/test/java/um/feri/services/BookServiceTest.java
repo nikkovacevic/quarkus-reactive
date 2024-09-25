@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import um.feri.model.Book;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
@@ -26,7 +28,6 @@ class BookServiceTest {
 
     private static Long bookId;
 
-    @Transactional
     @BeforeEach
     void setUp(TransactionalUniAsserter a) {
         a.execute(() -> {
@@ -39,7 +40,6 @@ class BookServiceTest {
         });
     }
 
-    @Transactional
     @AfterEach
     void tearDown(TransactionalUniAsserter a) {
         a.execute(() -> Book.deleteAll());
@@ -108,4 +108,11 @@ class BookServiceTest {
 
         a.assertFailedWith(() -> service.deleteBook(99L), NotFoundException.class);
     }
+
+//    4.4 Testiranje, primer testa, ki ne dela
+//    @Test
+//    void testWithAwait() {
+//        List<Book> books = service.getAllBooks().await().indefinitely();
+//        assertEquals(1, books.size());
+//    }
 }

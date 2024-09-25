@@ -72,7 +72,8 @@ class BookResourceTest {
 
     @Test
     void addBook() {
-        String newBookJson = "{ \"title\": \"The Hobbit\", \"isbn\": \"9876543210\", \"price\": 49.99, \"yearOfRelease\": 1937, \"author\": \"J.R.R. Tolkien\" }";
+        String newBookJson = "{ \"title\": \"The Hobbit\", \"isbn\": \"9876543210\", " +
+                "\"price\": 49.99, \"yearOfRelease\": 1937, \"author\": \"J.R.R. Tolkien\" }";
         given()
                 .contentType("application/json")
                 .body(newBookJson)
@@ -81,7 +82,8 @@ class BookResourceTest {
                 .then()
                 .statusCode(201);
 
-        String newBookWithDuplicateIsbn = "{ \"title\": \"The Hobbit\", \"isbn\": \"9876543210\", \"price\": 49.99, \"yearOfRelease\": 1937, \"author\": \"J.R.R. Tolkien\" }";
+        String newBookWithDuplicateIsbn = "{ \"title\": \"The Hobbit\", \"isbn\": \"9876543210\", " +
+                "\"price\": 49.99, \"yearOfRelease\": 1937, \"author\": \"J.R.R. Tolkien\" }";
         given()
                 .contentType("application/json")
                 .body(newBookWithDuplicateIsbn)
@@ -93,7 +95,8 @@ class BookResourceTest {
 
     @Test
     void updateBook() {
-        String updatedBookJson = "{ \"title\": \"Murder on the Orient Express\", \"isbn\": \"1234567890\", \"price\": 29.99, \"yearOfRelease\": 1934, \"author\": \"Agatha Christie\" }";
+        String updatedBookJson = "{ \"title\": \"Murder on the Orient Express\", \"isbn\": \"1234567890\", " +
+                "\"price\": 29.99, \"yearOfRelease\": 1934, \"author\": \"Agatha Christie\" }";
         given()
                 .contentType("application/json")
                 .body(updatedBookJson)

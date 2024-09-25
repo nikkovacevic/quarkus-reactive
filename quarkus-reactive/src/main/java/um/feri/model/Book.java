@@ -3,16 +3,11 @@ package um.feri.model;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +16,6 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name = "books")
 public class Book extends PanacheEntity {
-
     @Column(nullable = false)
     private String title;
     @Column(nullable = false, unique = true)
@@ -32,5 +26,4 @@ public class Book extends PanacheEntity {
     private Integer yearOfRelease;
     @Column(nullable = false)
     private String author;
-
 }

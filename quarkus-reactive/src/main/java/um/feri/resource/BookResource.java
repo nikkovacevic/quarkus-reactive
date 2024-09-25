@@ -5,6 +5,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
@@ -54,5 +55,14 @@ public class BookResource {
     public Uni<Response> deleteBook(@PathParam("bookId") Long bookId) {
         return bookService.deleteBook(bookId).onItem().transform(x -> Response.status(204).build());
     }
+
+//    2.2 Reaktivni pristop primer GET endpointa
+//    @GET
+//    @Path("/books/{bookId}")
+//    public Uni<Response> getBooks(@PathParam("bookId") Long id) {
+//        return Book.findById(id)
+//                .onItem().ifNotNull().transform(book -> Response.status(200).entity(book).build())
+//                .onItem().ifNull().failWith(new NotFoundException());
+//    }
 
 }
