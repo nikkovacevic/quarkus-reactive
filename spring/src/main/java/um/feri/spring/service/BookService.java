@@ -1,6 +1,5 @@
 package um.feri.spring.service;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -11,11 +10,13 @@ import um.feri.spring.repository.BookRepository;
 import java.util.List;
 import java.util.Optional;
 
-@RequiredArgsConstructor
 @Service
 public class BookService {
-
     private final BookRepository repository;
+
+    public BookService(BookRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Book> getAllBooks() {
         return repository.findAll(Sort.by("title"));

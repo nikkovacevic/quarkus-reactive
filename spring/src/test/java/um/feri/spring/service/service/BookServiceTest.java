@@ -1,4 +1,4 @@
-package um.feri.spring.service;
+package um.feri.spring.service.service;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.server.ResponseStatusException;
 import um.feri.spring.model.Book;
 import um.feri.spring.repository.BookRepository;
+import um.feri.spring.service.BookService;
 
 import java.util.List;
 

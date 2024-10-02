@@ -43,7 +43,6 @@ public class BookControllerTest {
         given()
                 .when()
                 .get("/books")
-                .prettyPeek()
                 .then()
                 .statusCode(200)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)

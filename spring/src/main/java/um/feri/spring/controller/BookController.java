@@ -1,4 +1,4 @@
-package um.feri.spring.service.controller;
+package um.feri.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/books")
 public class BookController {
-
     private final BookService bookService;
     public BookController(BookService bookService) {
         this.bookService = bookService;
@@ -54,6 +53,4 @@ public class BookController {
         bookService.deleteBook(bookId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
 }
