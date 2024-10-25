@@ -30,8 +30,14 @@ public class BookService {
 
     public Uni<Book> createBook(Book newBook) {
         return findBookIfExists(newBook)
-                .onItem().ifNotNull().failWith(new WebApplicationException("Book already exists", Response.Status.CONFLICT))
-                .onItem().ifNull().switchTo(() -> Panache.withTransaction(newBook::persist).replaceWith(newBook));
+                .onItem()
+                    .ifNotNull()
+                        .failWith(new WebApplicationException("Book already exists", Response.Status.CONFLICT))
+                .onItem()
+                    .ifNull()
+                        .switchTo(() ->
+                              Panache.withTransaction(newBook::persist).replaceWith(newBook)
+                        );
     }
 
     public Uni<Void> updateBook(Long id, Book updatedBook) {
