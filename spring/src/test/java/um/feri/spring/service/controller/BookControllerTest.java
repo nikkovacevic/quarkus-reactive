@@ -28,7 +28,11 @@ public class BookControllerTest {
     void setUp() {
         RestAssured.port = port;
 
-        Book book = new Book("Murder on the Orient Express", "1234567890", 39.99, 1934, "Agatha Christie");
+        Book book = new Book("Murder on the Orient Express",
+                             "1234567890",
+                             39.99,
+                             1934,
+                             "Agatha Christie");
         bookRepository.save(book);
         bookId = book.getId();
     }
