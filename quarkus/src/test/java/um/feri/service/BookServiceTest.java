@@ -26,7 +26,11 @@ class BookServiceTest {
     @Transactional
     @BeforeEach
     void setUp() {
-        Book book = new Book("Murder on the Orient Express", "1234567890", 39.99, 1934, "Agatha Christie");
+        Book book = new Book("Murder on the Orient Express",
+                             "1234567890",
+                             39.99,
+                             1934,
+                             "Agatha Christie");
         book.persist();
         bookId = book.id;
     }
