@@ -1,6 +1,8 @@
 # Quarkus-based development of reactive backend systems
 
-In modern microservice environments, cloud infrastructure costs can be high. Which is whz in our thesis, we explore reactive backend systems, which offer greater efficiency and lower resource consumption when processing requests. We focused on Quarkus-based reactive systems and compared them to traditional backend systems developed in Quarkus and Spring Boot frameworks.
+_Master's thesis_
+
+In modern microservice environments, cloud infrastructure costs can be high. Which is why in our thesis, we explore reactive backend systems, which offer greater efficiency and lower resource consumption when processing requests. We focused on Quarkus-based reactive systems and compared them to traditional backend systems developed in Quarkus and Spring Boot frameworks.
 In our thesis we have implemented a reactive backend system using Quarkus and compared it to the traditional ones, identifying all the challenges we encountered throughout the entire development cycle. During testing, we simulated high load by sending concurrent requests and found that the reactive approach results in shorter processing times and lower resource consumption. When choosing an approach, it is necessary to balance the higher development costs of a reactive system with potential savings in cloud infrastructure costs.
 
 ## Purpose
