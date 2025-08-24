@@ -8,6 +8,10 @@ In our thesis we have implemented a reactive backend system using Quarkus and co
 This project was developed as a practical part of my masters thesis on Quarkus based reactive systems. The goal was to build a reactive backend system using Quarkus, traditional backend system using Quarkus and traditional backend system using Spring Boot.
 All of the projects have the same CRUD features, so that we can compare the development, testing and deployment process between them. The backend systems were also tested on performance by simulating concurrent requests to the server in local and cloud (MS Azure) environments.
 
+## Findings
+
+The thesis explores reactive backend development with Quarkus and compares it to traditional approaches (Quarkus and Spring Boot). Reactive systems offer faster request handling and more efficient resource usage but introduce higher complexity, a steeper learning curve, and more challenging debugging. Tests under high load confirmed that reactive systems are more efficient and responsive, especially in resource-constrained environments, while traditional systems remain simpler and more practical when resources are not a limitation. Quarkus enables combining both approaches within one backend, allowing developers to balance efficiency with development complexity.
+
 ## Thesis
 
-The thesis is available at ...
+The full thesis is available at [...](https://dk.um.si/IzpisGradiva.php?id=91139&lang=slv)
